@@ -57,3 +57,9 @@ def createFolder(context, title, allowed_types=['Topic','Folder','Document'],
         # reindexamos para que el catálogo se entere de los cambios
         folder.reindexObject()
 
+def createConsejoComunal(context, title):
+    oid = idnormalizer.normalize(title, 'es')
+    if not hasattr(context, oid):
+        context.invokeFactory('consejo_comunal', id=oid, title=title)
+        cc = context[oid]
+        cc.reindexObject()       
